@@ -1,0 +1,115 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% block content %}
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <!-- <h6 class="h2 text-white d-inline-block mb-0">Tables</h6> -->
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'add' %}">Check-in</a></li>
+                            <!-- <li class="breadcrumb-item active" aria-current="page">Tables</li> -->
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="#" class="btn btn-sm btn-neutral">New</a>
+                    <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header -->
+{% if not error_message %}
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- <div class="card-header border-0">
+                    <div class="col-lg-12 col-8 text-center">
+                        <button onclick=location.href="{% url 'add' %}" type="button" class="btn btn-primary my-4">
+                            Check-in
+                        </button>
+                    </div>
+                </div> -->
+                <br><br>
+                {% if not variable and not error_message %}
+                <p style="text-align:center;" id="myDIV"><img style="clip-path: circle();" src="{% url 'video_feed' %}">
+                </p>
+                <p style="text-align:center;">Focus to your Camera only</p>
+                <p style="text-align:center;"><button class="btn btn-primary my-4"
+                        onclick=location.href="{% url 'recognize' %}">Mark
+                        Attendance</button></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if error_message %}
+<div class="col-md-4">
+    <button type="button" id="alert" class="btn btn-block btn-warning mb-3" data-toggle="modal"
+        data-target="#modal-notification" data-keyboard="false" data-backdrop="static"></button>
+    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
+        aria-hidden="true">
+        <div class="modal-dialog modal-danger modal-dialog-centered modal-10" role="document">
+            <div class="modal-content bg-gradient-danger">
+
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-notification">Your attention is required
+                    </h6>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button> -->
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="py-3 text-center">
+                        <i class="ni ni-bell-55 ni-3x"></i>
+                        <p style="text-align:center;">{{ error_message }}</p>
+                        <p style="text-align:center;"><button class="btn btn-primary my-4"
+                                onclick=location.href="{% url 'add' %}">Try Again</button></p>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-white">Ok, Got it</button> -->
+                    <button type="button" onclick=location.href="{% url 'home' %}"
+                        class="btn btn-link text-white ml-auto" data-dismiss="modal">Go back</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script>
+    setTimeout(printSomething, 1000);
+
+    function printSomething() {
+        window.scrollTo(0, document.body.scrollHeight);
+        // setTimeout(printSomething, 1000);
+    }
+</script>
+{% if error_message %}
+<script>
+    document.getElementById('alert').style.display = "none";
+    document.getElementById('alert').click();
+</script>
+{% endif %}
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+
+{% endblock javascripts %}

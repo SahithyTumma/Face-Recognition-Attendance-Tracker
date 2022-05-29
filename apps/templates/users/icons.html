@@ -1,0 +1,304 @@
+{% extends 'users/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="{% url 'Maintables' %}"><i class="fas fa-home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{% url 'register_user' %}">Employees List</a></li>
+
+                        </ol>
+                    </nav>
+                    <form action="{% url 'get_name' %}" method="POST"
+                        class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+                        {% csrf_token %}
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group-alternative input-group-merge">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                                <input id="search" name="search" class="form-control" placeholder="Search" type="text">
+                            </div>
+                        </div>
+                        <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
+                            aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Employees List</h3>
+                    <div class="col-lg-12 col-8 text-center">
+                        <button type="button" id="myCheck" class="btn btn-sm btn-neutral" data-toggle="modal"
+                            data-target="#exampleModal">
+                            Add Employees
+                        </button>
+                        <button type="button" id="myCheck1" class="btn btn-sm btn-neutral" data-toggle="modal"
+                            data-target="#exampleModal1">
+                            Delete Employees
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort" data-sort="name">User</th>
+                                <th scope="col" class="sort" data-sort="budget">Name</th>
+                                <th scope="col" class="sort" data-sort="status">Dob</th>
+                                <th scope="col" class="sort" data-sort="status">Designation</th>
+                                <th scope="col" class="sort" data-sort="status">Address</th>
+                                <th scope="col" class="sort" data-sort="status">Aadhar Number</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            {% for user in users %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.EmailID }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.Name }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.Dob }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.Designation }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.Address }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="name mb-0 text-sm">{{ user.AadharCard }}</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card bg-secondary shadow border-0">
+                        <div class="text-center text-muted mb-4">
+                            {% if msg %}
+                            <small>{{ msg | safe }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="text-center text-muted mb-4">
+                            Add Credentials for user you wanted to add
+                        </div>
+                        <form action="{% url 'register_user' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input id="username" name="username" placeholder="Email ID" class="form-control"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input id="name" name="name" placeholder="Name" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input id="date" name="date" class="form-control datepicker"
+                                        placeholder="Date of Birth" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input id="designation" name="designation" placeholder="Designation"
+                                        class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input id="address" name="address" placeholder="Address" class="form-control"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+                                    <input id="aadhar" name="aadhar" placeholder="Aadhar Number" class="form-control"
+                                        type="text">
+                                </div>
+                            </div>
+
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="card bg-secondary shadow border-0">
+
+                        <div class="text-center text-muted mb-4">
+                            {% if msg1 %}
+                            <small>{{ msg1 | safe }}</small>
+                            {% endif %}
+                        </div>
+                        <div class="text-center text-muted mb-4">
+                            Enter Email Id of the Employee to delete
+                        </div>
+                        <form action="{% url 'delete' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                    </div>
+
+                                    <input id="user" name="user" class="form-control" placeholder="Email" type="text">
+                                </div>
+                            </div>
+                            <span class="text-error"> {{form.username.errors}} </span>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary mt-4">Delete account</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+{% if success %}
+<script>
+    document.getElementById('myCheck').click()
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endif %}
+{% if Success %}
+<script>
+    document.getElementById('myCheck1').click()
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endif %}
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+<script src="static/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+{% endblock javascripts %}

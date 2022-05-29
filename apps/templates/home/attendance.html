@@ -1,0 +1,96 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <!-- <h6 class="h2 text-white d-inline-block mb-0">Tables</h6> -->
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'add' %}">Check-in</a></li>
+                            <!-- <li class="breadcrumb-item active" aria-current="page">Tables</li> -->
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="#" class="btn btn-sm btn-neutral">New</a>
+                    <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row"> -->
+<!-- <p style="text-align:center;">Welcome {{name}}</p> -->
+
+<!-- <div class="modal-dialog modal-dialog-centered modal-sm" role="document"> -->
+<!-- <div class="modal-content"> -->
+<div class="container-fluid mt--6">
+    <!-- <div class="row"> -->
+    <!-- <div class="col"> -->
+    <div class="card">
+        <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+                <form action="{% url 'attendance' %}" method="post">
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <button {% if In %} disabled {% endif %} type="submit" class="btn btn-primary" name="in" id="in"
+                            data-toggle="modal" data-target="#exampleModal">
+                            In
+                        </button>
+                    </div>
+                    <br><br>
+                    <!-- <div class="text-center">
+                            <button {% if In %} disabled {% endif %} type="submit" name="in" id="in"
+                                class="btn btn-primary my-4">In</button>
+                        </div> -->
+                    <div class="text-center">
+                        <input {% if Mealin and not Mealout %} value="End Meal" {% else %} value="Meal" {% endif %}
+                            type="submit" class="btn btn-primary" name="meal" id="meal" data-toggle="modal"
+                            data-target="#exampleModal">
+                        <!-- <input {% if Mealin and not Mealout %} value="End Meal" {% else %} value="Meal" {% endif %}
+                                type="submit" name="meal" class="btn btn-primary my-4"> -->
+                    </div>
+                    <br><br>
+                    <!-- <div class="text-center">
+                            <button {% if Out %} disabled {% endif %} type="submit" name="out"
+                                class="btn btn-primary my-4">Out</button>
+                        </div> -->
+                    <div class="text-center">
+                        <button {% if not In %} disabled {% endif %} type="submit" class="btn btn-primary" name="out"
+                            data-toggle="modal" data-target="#exampleModal">
+                            Out
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+</div>
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+{% endblock content %}
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+{% if not In %}
+<script>
+    const button = document.getElementById('meal')
+    button.disabled = true
+</script>
+{% endif %}
+{% endblock javascripts %}
