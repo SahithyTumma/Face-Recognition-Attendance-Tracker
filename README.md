@@ -6,7 +6,7 @@ The first thing to do is to clone the repository:
 
 ```sh
 $ git clone https://github.com/SahithyTumma/Face-Recognition-Attendance-Tracker.git
-$ cd sample-django-app
+$ cd Face-Recognition-Attendance-Tracker
 ```
 
 Create a virtual environment to install dependencies in and activate it:
