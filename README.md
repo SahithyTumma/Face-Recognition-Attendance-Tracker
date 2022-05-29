@@ -1,18 +1,15 @@
 # Face-Recognition-Attendance-Tracker
+using Microsoft Azure Face Api
+
 
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://github.com/gocardless/sample-django-app.git
-$ cd sample-django-app
+$ git clone https://github.com/SahithyTumma/Face-Recognition-Attendance-Tracker.git
+$ cd Face-Recognition-Attendance-Tracker
 ```
 
-Create a virtual environment to install dependencies in and activate it:
-
-```sh
-$ virtualenv2 --no-site-packages env
-$ source env/bin/activate
-```
+Create a virtual environment to install dependencies in and activate it.
 
 Then install the dependencies:
 
