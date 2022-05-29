@@ -7,7 +7,7 @@
 
 <!-- Header -->
 {% if not error_message %}
-<p style="text-align:center;">Please capture you image to train your face.</p>
+<p style="text-align:center;">Please capture image to train your face.</p>
 <p style="text-align:center;" id="myDIV"><img style="clip-path: circle();" src="{% url 'video_feed' %}"></p>
 <p style="text-align:center;"><button onclick=location.href="{% url 'capture' %}">Capture</button></p>
 {% endif %}
