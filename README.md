@@ -5,7 +5,7 @@ using Microsoft Azure Face Api
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://github.com/gocardless/sample-django-app.git
+$ git clone https://github.com/SahithyTumma/Face-Recognition-Attendance-Tracker.git
 $ cd sample-django-app
 ```
 
