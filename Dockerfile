@@ -6,7 +6,8 @@ COPY . .
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN pip3 install opencv-python-headless==4.5.3.56
+RUN apt-get update && apt-get install -y python3-opencv
+RUN pip install opencv-python
 
 # install python dependencies
 RUN pip install --upgrade pip
