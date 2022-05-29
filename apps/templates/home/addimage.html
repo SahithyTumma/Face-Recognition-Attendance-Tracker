@@ -7,14 +7,14 @@
 
 <!-- Header -->
 {% if not error_message %}
-<p style="text-align:center;">Please capture image to train your face.</p>
+<p style="text-align:center;">Please capture your image to train your face.</p>
 <p style="text-align:center;" id="myDIV"><img style="clip-path: circle();" src="{% url 'video_feed' %}"></p>
 <p style="text-align:center;"><button onclick=location.href="{% url 'capture' %}">Capture</button></p>
 {% endif %}
 
 {% if error_message %}
 <p style="text-align:center;">{{ error_message }}</p>
-<p style="text-align:center;"><button onclick='home'>Try Again</button></p>
+<p style="text-align:center;"><button onclick=location.href="{% url 'home' %}">Try Again</button></p>
 {% endif %}
 
 {% endblock content %}

@@ -173,7 +173,7 @@ def capture(request):
         context = {'segment': 'index'}
         return HttpResponseRedirect(reverse('home'))
     else:
-        return render(request, 'home/addimages.html', {'error_message': 'Image you captured is not of sufficient quality or no person detected, Try Again'})
+        return render(request, 'home/addimage.html', {'error_message': 'Image you captured is not of sufficient quality or no person detected, Try Again'})
 
 @login_required(login_url="/loginUser/")
 def passwordchange(request):
