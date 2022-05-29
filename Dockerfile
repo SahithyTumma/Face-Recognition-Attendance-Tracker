@@ -6,11 +6,13 @@ COPY . .
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update
+RUN apt install -y libgl1-mesa-glx
+
 # install python dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apt-get update && apt-get install libgl1
 # running migrations
 RUN python manage.py migrate
 
