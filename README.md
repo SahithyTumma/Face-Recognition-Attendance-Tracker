@@ -9,7 +9,7 @@ $ git clone https://github.com/SahithyTumma/Face-Recognition-Attendance-Tracker.
 $ cd Face-Recognition-Attendance-Tracker
 ```
 
-Create a virtual environment to install dependencies in and activate it:
+Create a virtual environment to install dependencies in and activate it.
 
 Then install the dependencies:
 
