@@ -8,7 +8,7 @@ from apps.home import views
 
 urlpatterns = [
     path('attendance', views.home, name='attendance'),
-    path('/', views.main, name="main"),
+    path('', views.main, name="main"),
     path('home', views.index, name='home'),
     path('video_feed', views.video_feed, name='video_feed'),
     path('recognize', views.recognize, name='recognize'),
