@@ -1,4 +1,6 @@
 # Face-Recognition-Attendance-Tracker
+--using Microsoft Azure Face Api
+
 
 The first thing to do is to clone the repository:
 
