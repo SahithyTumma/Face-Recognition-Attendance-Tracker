@@ -6,8 +6,7 @@ COPY . .
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update
-RUN apt install -y libgl1-mesa-glx
+RUN pip3 install opencv-python-headless==4.5.3.56
 
 # install python dependencies
 RUN pip install --upgrade pip
